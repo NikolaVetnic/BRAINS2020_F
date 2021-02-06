@@ -75,9 +75,9 @@ public class PotprogramiZ3 {
 	
 	private static String[][] zameni(String[][] arr, int i, int j) {
 		
-		String[] tmp = { arr[i][0], arr[i][1], arr[i][2], arr[i][3] };
-		arr[i] = new String[] { arr[j][0], arr[j][1], arr[j][2], arr[j][3] };
-		arr[j] = new String[] { tmp[0], tmp[1], tmp[2], tmp[3] };
+		String[] tmp = arr[i];
+		arr[i] = arr[j];
+		arr[j] = tmp;
 		
 		return arr;
 	}
