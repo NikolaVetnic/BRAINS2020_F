@@ -58,8 +58,8 @@ public class Zadatak1 {
 				case 1: unosPrihoda(in);					break;
 				case 2: autoUnosPrihoda();					break;
 				case 3: unosPrihodaNaPoziciji(in);			break;
-				case 4: prikaziSortiraneKategorije(in);		break;
-				case 5: prikaziSortiraneDane(in);			break;
+				case 4: prikaziKategorije(in);				break;
+				case 5: prikaziDane(in);					break;
 				case 6: prikaziNajmanjuZaradu();			break;
 				case 7: prikaziMesecniPrihod();				break;
 				case 8: prikaziMesecniProsek();				break;
@@ -101,6 +101,15 @@ public class Zadatak1 {
 		} while (out < 0);
 		
 		return out;
+	}
+	
+	
+	private static boolean preuzmiBoolean(Scanner in, String poruka) {
+		
+		System.out.print(poruka);
+		int out = in.nextInt();
+		
+		return out == 0 ? false : true;
 	}
 
 
@@ -172,7 +181,7 @@ public class Zadatak1 {
 	}
 
 
-	private static void prikaziSortiraneDane(Scanner in) {
+	private static void prikaziDane(Scanner in) {
 		
 		// selekcija kategorije i uzimanje vrednosti
 		
@@ -186,23 +195,29 @@ public class Zadatak1 {
 			prihodi[i] = m[i][kat];
 		}
 		
+		boolean sort = preuzmiBoolean(in, "Sortirati? [0] Ne, [1] Da --> ");
+		System.out.println();
+		
 		// selection sort
 		
-		for (int i = idx.length - 1; i > 0; i--) {
+		if (sort) {
 			
-			int max = 0;
-			
-			for (int j = 1; j <= i; j++)
-				max = prihodi[j] > prihodi[max] ? j : max;
+			for (int i = idx.length - 1; i > 0; i--) {
 				
-			if (max != i) {
-				double tmpDbl = prihodi[i];
-				prihodi[i] = prihodi[max];
-				prihodi[max] = tmpDbl;
+				int max = 0;
 				
-				int tmpInt = idx[i];
-				idx[i] = idx[max];
-				idx[max] = tmpInt;
+				for (int j = 1; j <= i; j++)
+					max = prihodi[j] > prihodi[max] ? j : max;
+					
+				if (max != i) {
+					double tmpDbl = prihodi[i];
+					prihodi[i] = prihodi[max];
+					prihodi[max] = tmpDbl;
+					
+					int tmpInt = idx[i];
+					idx[i] = idx[max];
+					idx[max] = tmpInt;
+				}
 			}
 		}
 		
@@ -219,7 +234,7 @@ public class Zadatak1 {
 	}
 
 
-	private static void prikaziSortiraneKategorije(Scanner in) {
+	private static void prikaziKategorije(Scanner in) {
 
 		// selekcija dana i uzimanje vrednosti
 		
@@ -233,23 +248,29 @@ public class Zadatak1 {
 			prihodi[j] = m[dan][j];
 		}
 		
+		boolean sort = preuzmiBoolean(in, "Sortirati? [0] Ne, [1] Da --> ");
+		System.out.println();
+		
 		// selection sort
 		
-		for (int i = idx.length - 1; i > 0; i--) {
-			
-			int max = 0;
-			
-			for (int j = 1; j <= i; j++)
-				max = prihodi[j] > prihodi[max] ? j : max;
+		if (sort) {
+		
+			for (int i = idx.length - 1; i > 0; i--) {
 				
-			if (max != i) {
-				double tmpDbl = prihodi[i];
-				prihodi[i] = prihodi[max];
-				prihodi[max] = tmpDbl;
+				int max = 0;
 				
-				int tmpInt = idx[i];
-				idx[i] = idx[max];
-				idx[max] = tmpInt;
+				for (int j = 1; j <= i; j++)
+					max = prihodi[j] > prihodi[max] ? j : max;
+					
+				if (max != i) {
+					double tmpDbl = prihodi[i];
+					prihodi[i] = prihodi[max];
+					prihodi[max] = tmpDbl;
+					
+					int tmpInt = idx[i];
+					idx[i] = idx[max];
+					idx[max] = tmpInt;
+				}
 			}
 		}
 		
