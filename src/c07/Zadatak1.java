@@ -72,6 +72,36 @@ public class Zadatak1 {
 		
 		in.close();
 	}
+	
+	
+	private static int preuzmiVrednost(Scanner in, String poruka, int min, int max) {
+		
+		int out;
+		do {
+			System.out.print(poruka);
+			out = in.nextInt();
+			
+			if (!(min <= out && out <= max)) System.out.println("Greska! Vrednost van opsega [" + min + ", " + max + "]...");
+			
+		} while (!(min <= out && out <= max));
+		
+		return out;
+	}
+	
+	
+	private static double preuzmiPrihod(Scanner in, String poruka) {
+		
+		double out;
+		do {
+			System.out.print(poruka);
+			out = in.nextInt();
+			
+			if (out < 0) System.out.println("Prihod ne sme biti negativan!");
+			
+		} while (out < 0);
+		
+		return out;
+	}
 
 
 	private static void prikaziMesecniProsek() {
@@ -101,8 +131,7 @@ public class Zadatak1 {
 		
 		System.out.println("[0] Izlaz\n");
 		
-		System.out.print("Izbor --> ");
-		int choice = in.nextInt();
+		int choice = preuzmiVrednost(in, "Izbor --> ", 0, 9);
 		
 		System.out.println();
 		
@@ -147,8 +176,7 @@ public class Zadatak1 {
 		
 		// selekcija kategorije i uzimanje vrednosti
 		
-		System.out.print("Kat : ");
-		int kat = in.nextInt();
+		int kat = preuzmiVrednost(in, "Kat : ", 0, BR_KAT - 1);
 		
 		int[] idx = new int[BR_DANA];
 		double[] prihodi = new double[BR_DANA];
@@ -195,8 +223,7 @@ public class Zadatak1 {
 
 		// selekcija dana i uzimanje vrednosti
 		
-		System.out.print("Dan : ");
-		int dan = in.nextInt();
+		int dan = preuzmiVrednost(in, "Dan : ", 0, BR_DANA - 1);
 		
 		int[] idx = new int[BR_KAT];
 		double[] prihodi = new double[BR_KAT];
@@ -246,14 +273,10 @@ public class Zadatak1 {
 
 	private static void unosPrihodaNaPoziciji(Scanner in) {
 		
-		System.out.print("Dan : ");
-		int i = in.nextInt();
+		int i = preuzmiVrednost(in, "Dan : ", 0, BR_DANA - 1);
+		int j = preuzmiVrednost(in, "Kat : ", 0, BR_KAT - 1);
 		
-		System.out.print("Kat : ");
-		int j = in.nextInt();
-		
-		System.out.println("Dan[" + i + "] Kat[" + j + "] : ");
-		m[i][j] = in.nextDouble();
+		m[i][j] = preuzmiPrihod(in, "Dan[" + i + "] Kat[" + j + "] : ");
 	}
 
 
@@ -290,11 +313,8 @@ public class Zadatak1 {
 
 	private static void unosPrihoda(Scanner in) {
 		
-		for (int i = 0; i < m.length; i++) {
-			for (int j = 0; j < m[0].length; j++) {
-				System.out.print("Dan[" + i + "] Kat[" + j + "] : ");
-				m[i][j] = in.nextDouble();
-			}
-		}
+		for (int i = 0; i < m.length; i++)
+			for (int j = 0; j < m[0].length; j++)
+				m[i][j] = preuzmiPrihod(in, "Dan[" + i + "] Kat[" + j + "] : ");
 	}
 }
