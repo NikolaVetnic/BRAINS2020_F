@@ -54,14 +54,14 @@ public class PotprogramiZ3 {
 	}
 	
 	
-	private static String[][] sortiraj(String[][] polaznici) {
+	private static String[][] sortiraj(String[][] polaznici, int k) {
 		
 		for (int i = polaznici.length - 1; i > 0; i--) {
 			
 			boolean exchOccurred = false;
 			
 			for (int j = 0; j < i; j++)
-				if (polaznici[j][0].compareTo(polaznici[j + 1][0]) >= 0) {
+				if (polaznici[j][k].compareTo(polaznici[j + 1][k]) >= 0) {
 					polaznici = zameni(polaznici, j, j + 1);
 					exchOccurred = true;
 				}
@@ -88,7 +88,7 @@ public class PotprogramiZ3 {
 		Scanner in = new Scanner(System.in);
 		
 		String[][] polaznici = unosPolaznika(in);
-		polaznici = sortiraj(polaznici);
+		polaznici = sortiraj(polaznici, 0);
 		stampaj(polaznici);
 		
 		in.close();
